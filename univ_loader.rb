@@ -68,14 +68,13 @@ class UnivLoader
     @doc.css(@css +" a").each do |link|
       full_url = link['href']
       if @threaded
-        threads << Thread.new { self.makePath(full_url) }
+        fork do
+          self.makePath(full_url)
+        end
       else
         self.makePath(full_url)
       end
 
-    end
-    threads.each do |thread|
-      thread.join
     end
   end
 
@@ -96,7 +95,7 @@ class UnivLoader
   end
 
   def checkFileType(url)
-    if not @allowed_Files.empty?
+    if @allowed_Files
       type = url.split('.').last
       if @allowed_Files.include?(type)
         self.checkIfFileAlreadyExists(url)
@@ -121,7 +120,9 @@ if __FILE__ == $0
   thing = YAML.load_file('config.yml')
   thing.each do |modul|
     puts "Running " + modul[0]
-    load(modul)
+    #fork do
+      load(modul)
+    #end
     #puts modul[1]["user"]
     #puts modul[1]["password"]
     #puts modul[1]["destination"]

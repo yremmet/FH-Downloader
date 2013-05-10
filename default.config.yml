@@ -1,17 +1,17 @@
 
-# modul_Name :      # Name it
-#  url:  "http://www.test.com/index.html"   # Insert Basic URL to Parse From
-#  user:   "user"                               # basic HTTP Auth User
-#  password: "secret"                             # And Password
-#  destination: "/user/you"                          # Download Destination Folder
-#  css-Filter:  "div.downloads"                          # Filter the parsed links by css
-#  fileType-Filter:                         # Filter downloads by File Extension leave empty for all
+# modul_Name :                                  # Name it
+#  url:  "http://www.test.com/index.html"       # Insert URL to Parse Links From
+#  user:   "user"                               # Basic HTTP Auth User
+#  password: "secret"                           # And Password
+#  destination: "/user/you"                     # Download Destination Folder
+#  css-Filter:  "div.downloads"                 # Filter the parsed links by CSS
+#  fileType-Filter:                             # Filter downloads by File Extension leave empty for all
 #    - "pdf"
 #    - "zip"
 #    - "class"
 #    - "jar"
 #    - "zip"
 #    - "rar"
-#  relative_Path: false                     # website uses Relative Links or Full Path links
+#  relative_Path: false                         # Website uses Relative Links or Full Path Links
 
 

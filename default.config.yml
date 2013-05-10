@@ -3,7 +3,7 @@
 #  url:  "http://www.test.com/index.html"       # Insert URL to Parse Links From
 #  user:   "user"                               # Basic HTTP Auth User
 #  password: "secret"                           # And Password
-#  destination: "/user/you"                     # Download Destination Folder
+#  destination: "/user/you/"                     # Download Destination Folder
 #  css-Filter:  "div.downloads"                 # Filter the parsed links by CSS
 #  fileType-Filter:                             # Filter downloads by File Extension leave empty for all
 #    - "pdf"

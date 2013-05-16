@@ -14,7 +14,6 @@ class UnivLoader
 
   def initialize(baseURL, user, password, destination, css_Filter, file_Filter, relative_Path)
     @threaded = true
-    @doc = Nokogiri::HTML(open(baseURL))
     @user = user
     @password = password
     @css = css_Filter
@@ -27,6 +26,7 @@ class UnivLoader
     if relative_Path
       @baseURL = baseURL.split("/")
     end
+    @doc = Nokogiri::HTML(open(baseURL, :http_basic_authentication => [@user, @password]))
 
   end
 
@@ -67,6 +67,7 @@ class UnivLoader
     threads = []
     @doc.css(@css +" a").each do |link|
       full_url = link['href']
+
       if @threaded
         fork do
           self.makePath(full_url)
@@ -119,10 +120,13 @@ if __FILE__ == $0
 
   thing = YAML.load_file('config.yml')
   thing.each do |modul|
+    #if (modul[0] == "wete")
     puts "Running " + modul[0]
     #fork do
+
       load(modul)
     #end
+
     #puts modul[1]["user"]
     #puts modul[1]["password"]
     #puts modul[1]["destination"]

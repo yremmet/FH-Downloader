@@ -5,6 +5,8 @@ require 'digest'
 require 'open-uri'
 require 'openssl'
 require 'yaml'
+require 'timeout'
+
 
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
@@ -118,24 +120,15 @@ if __FILE__ == $0
   end
 
 
-  thing = YAML.load_file('config.yml')
-  thing.each do |modul|
-    #if (modul[0] == "wete")
-    puts "Running " + modul[0]
-    #fork do
-
+  modules = YAML.load_file('config.yml')
+  pids = []
+  modules.each do |modul|
+    pids << fork do
+      puts "Running " + modul[0]
       load(modul)
-    #end
-
-    #puts modul[1]["user"]
-    #puts modul[1]["password"]
-    #puts modul[1]["destination"]
-    #puts modul[1]["css-Filter"]
-    #puts modul[1]["fileType-Filter"]
-    #puts modul[1]["relative_Path"]
-
+    end
+  end
+  pids.each do |pid|
+    Process.wait(pid)
   end
 end
-
-
-
